@@ -33,9 +33,3 @@ This dataset is ideal for **exploratory data analysis (EDA)** and **predictive m
 3️⃣ Data Visualization  
 4️⃣ Predictive Modeling (Sales Forecasting)  
 5️⃣ Insights & Business Recommendations  
-
-🔗 **[GitHub Repository](#)** *(Replace # with your actual GitHub link)*  
-
----
-
-This version makes your project look professional and appealing to recruiters or fellow data enthusiasts. Let me know if you want to customize it further! 🚀
