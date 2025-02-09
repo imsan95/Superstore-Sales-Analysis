@@ -1,7 +1,3 @@
-Here's a well-structured and professional version of your project details for your GitHub profile:  
-
----
-
 # Supermarket Sales Analysis  
 
 ## 📌 **Project Overview**  
