@@ -1,6 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
+
+# Ensure output directory exists
+output_dir = "output"
+os.makedirs(output_dir, exist_ok=True)
 
 # Load dataset
 df = pd.read_csv("data/SampleSuperstore.csv")
@@ -12,10 +17,11 @@ df["Order Date"] = pd.to_datetime(df["Order Date"])
 df.drop_duplicates(inplace=True)
 
 # Summary statistics
-print(df.describe())
+df.describe().to_csv(f"{output_dir}/summary_statistics.csv")
 
 # Check for missing values
-print("\nMissing Values:\n", df.isnull().sum())
+with open(f"{output_dir}/missing_values.txt", "w") as f:
+    f.write(str(df.isnull().sum()))
 
 # 1. Sales Distribution
 plt.figure(figsize=(8,5))
@@ -23,7 +29,8 @@ sns.histplot(df["Sales"], bins=50, kde=True)
 plt.title("Sales Distribution")
 plt.xlabel("Sales")
 plt.ylabel("Frequency")
-plt.show()
+plt.savefig(f"{output_dir}/sales_distribution.png")  # Save plot
+plt.close()
 
 # 2. Sales by Category
 category_sales = df.groupby("Category")[["Sales", "Profit"]].sum()
@@ -33,7 +40,8 @@ sns.barplot(x=category_sales.index, y=category_sales["Sales"])
 plt.title("Sales by Category")
 plt.xlabel("Category")
 plt.ylabel("Total Sales")
-plt.show()
+plt.savefig(f"{output_dir}/sales_by_category.png")  # Save plot
+plt.close()
 
 # 3. Monthly Sales Trend
 df["Month"] = df["Order Date"].dt.to_period("M")
@@ -46,9 +54,7 @@ plt.title("Monthly Sales Trend")
 plt.xlabel("Month")
 plt.ylabel("Total Sales")
 plt.grid()
-plt.show()
-print("EDA script executed successfully")
+plt.savefig(f"{output_dir}/monthly_sales_trend.png")  # Save plot
+plt.close()
 
-plt.savefig("output/sales_distribution.png")
-plt.savefig("output/sales_by_category.png")
-plt.savefig("output/monthly_sales_trend.png")
+print("EDA script executed successfully, check the 'output/' directory.")
